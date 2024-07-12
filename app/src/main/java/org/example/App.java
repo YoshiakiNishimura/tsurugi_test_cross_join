@@ -11,12 +11,15 @@ import com.tsurugidb.tsubakuro.kvs.RecordBuffer;
 import com.tsurugidb.tsubakuro.kvs.TransactionHandle;
 import com.tsurugidb.iceaxe.TsurugiConnector;
 import com.tsurugidb.iceaxe.session.TsurugiSession;
+// import com.tsurugidb.iceaxe.sql.result.TgResultMapping;
 import com.tsurugidb.iceaxe.transaction.manager.TgTmSetting;
 import com.tsurugidb.iceaxe.transaction.manager.TsurugiTransactionManager;
 import com.tsurugidb.iceaxe.transaction.option.TgTxOption;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.net.URI;
+//import java.util.stream.Stream;
+//import java.util.stream.Stream.Builder;
 
 public class App {
     public class Setting {
@@ -151,6 +154,15 @@ public class App {
             tm.executeAndForEach(sql, record -> {
                 // do nothing
             });
+            /*
+             * TgResultMapping<Integer> resultMapping = TgResultMapping.of(record ->
+             * record.nextInt());
+             * Builder<Integer> builder = Stream.<Integer>builder();
+             * tm.executeAndForEach(sql, resultMapping, builder::add);
+             * long end = System.nanoTime();
+             * Stream<Integer> stream = builder.build();
+             * stream.forEach(System.out::println);
+             */
             long end = System.nanoTime();
             System.out.println("executeAndForEach do nothing" + (end - start) / 1_000_000 + " ms");
         }
